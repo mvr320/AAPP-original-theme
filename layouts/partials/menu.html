@@ -1,0 +1,51 @@
+{{ if .Site.Menus.main }}
+  <!--navigation bar-->
+  <ul>
+    {{ $currentPage := . }}
+    <li><a href="/">Home</a></li>
+    {{ range .Site.Menus.main }}
+      {{ if .HasChildren }}
+        <li class="dropdown {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+          <a class="dropbtn" href="#">{{ .Pre }}{{ .Name }}</a>
+          <div class="dropdown-content">
+            {{ range .Children }}
+              <!--<li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">-->
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              <!--</li>-->
+            {{ end }}
+            </div>
+        </li>
+      {{ else }}
+        <li>
+          <a href="{{ .URL }}">
+            {{ .Pre }}{{ .Name }}
+          </a>
+        </li>
+      {{ end }}
+    {{ end }}
+    <li class="right"><a href="https://domjudge.aapp.storm.vu">To DOMjudge</a></li>
+  </ul>
+{{ end }}
+
+<!--
+<div class="container">
+  <div class="row justify-content-md-center">
+    <nav class="navbar navbar-dark navbar-expand-md">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {{ $currentPage := . }}
+
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          {{ range .Site.RegularPages }}
+          <li class="nav-item"><a class="nav-link" href="{{ .URL }}">{{ .LinkTitle }}&nbsp;</a></li>
+          {{ end }}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+-->
